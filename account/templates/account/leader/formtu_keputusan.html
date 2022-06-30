@@ -1,0 +1,59 @@
+{% extends "base_menu/base.html" %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-content--bge5">
+	<br><br><br>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<div class="card">
+				<form method="POST" enctype="multipart/form-data">
+					<div class="card-header">
+						<strong>{{judul_isi}}</strong> Forms
+					</div>
+					<div class="card-body card-block">
+						{% csrf_token %}
+						<div class="row col-md-12">
+							<div class="form-group col-md-12">
+								{{data.id_candidate.errors}}
+								{{data.id_candidate.label_tag}}
+								{{data.id_candidate}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-6">
+								{{data.nama_depan.errors}}
+								{{data.nama_depan.label_tag}}
+								{{data.nama_depan}}
+							</div>
+							<div class="form-group col-md-6">
+								{{data.nama_belakang.errors}}
+								{{data.nama_belakang.label_tag}}
+								{{data.nama_belakang}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-12">
+								{{data.status.errors}}
+								{{data.status.label_tag}}
+								{{data.status}}
+							</div>
+						</div>
+					</div>
+					<div class="card-footer form-group">
+						<button type="submit" class="btn btn-outline-success">
+							Selesai
+						</button>
+						<a href="javascript:history.back()" class="btn btn-outline-danger">
+							Batal
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}

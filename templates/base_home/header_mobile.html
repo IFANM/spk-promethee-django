@@ -1,0 +1,50 @@
+{% load static %}
+<header class="header-mobile header-mobile-2 d-block d-lg-none">
+    <div class="header-mobile__bar">
+        <div class="container-fluid">
+            <div class="header-mobile-inner">
+                <a class="logo" href="{% url 'index' %}">
+                    <img src="{% static "images/logo/logo-white.svg" %}" alt="CoolAdmin" />
+                </a>
+                <button class="hamburger hamburger--slider" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-mobile">
+        <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+                <li class="#">
+                    <a href="{% url 'index' %}">
+                        <i class="">
+                            <img src="{% static "images/icon/home.svg" %}" style="width:25px;">
+                        </i>
+                        <span class="bot-line"></span>Beranda
+                    </a>
+                </li>
+                <li class="#">
+                    <a href="{% url 'lowong_kerja' %}">
+                        <i class="">
+                            <img src="{% static "images/icon/briefcase.svg" %}" style="width:25px;">
+                        </i>
+                        <span class="bot-line"></span>Lowongan Kerja
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="sub-header-mobile-2 d-block d-lg-none">
+    <div class="header__tool">
+        <div class="account-wrap">
+            <a href="{% url 'login1' %}" class="btn btn-secondary">
+                Masuk
+                <img src="{% static "images/icon/log-in.svg" %}" style="width:30px;">
+            </a>
+        </div>
+    </div>
+</div>

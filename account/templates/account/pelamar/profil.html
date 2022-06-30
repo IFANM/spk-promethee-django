@@ -1,0 +1,122 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}	
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% include "base_menu/sideP.html" %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% include "base_menu/side_mobileP.html" %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+								{% if verif is True %}
+								<span class="status--process">Verifikasi Selesai</span>
+								{% else %}
+								<a href="{% url 'account:ubah_profil' %}" class="btn btn-primary" title="Ubah Data Profil">
+									<img src="{% static "images/icon/edit.svg" %}" style="width:20px;"> Ubah
+								</a>
+								{% endif %}
+							</div>
+							<hr>
+							<div class="au-card">
+								<form>
+									<div style="width: 100%; overflow: hidden;">
+										<div style="width: 50%; float: left;">
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>ID</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.id_candidate}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Email</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.cand_mail}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Nama Depan</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.nama_depan}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Nama Belakang</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.nama_belakang}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Jenis Kelamain</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.jenis_kelamin}}">
+												</div>
+											</div>
+										</div>
+
+										{# Batas #}
+
+										<div style="width: 50%; float: right;">
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Tanggal Lahir</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.tgl_lahir}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Nomor Telepon</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.no_telp}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Alamat</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.alamat}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>Foto Profil</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.foto_profil}}">
+												</div>
+											</div>
+											<div class="row form-group">
+												<label for="staticEmail" class="col-sm-4 col-form-label"><b>CV</b></label>:
+												<div class="col-sm-6">
+													<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{data.cv}}">
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

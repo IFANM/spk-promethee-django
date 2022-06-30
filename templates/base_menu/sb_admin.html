@@ -1,0 +1,64 @@
+{% load static %}
+<!-- SIDEBAR MAIN -->
+<div class="logo">
+	<a href="{% url 'account:index_admin' %}">
+		<img src="{% static "images/logo/logo-white.svg" %}" alt="Arrava" />
+	</a>
+</div>
+<div class="menu-sidebar2__content js-scrollbar1">
+	<div class="account2">
+		<div class="image img-cir img-120">
+			<img src="{% static "images/arrava.jpg" %}" alt="Admin" />
+		</div>
+		<h4 class="name">Admin</h4>
+		<a href="{% url 'logout1' %}">Keluar</a>
+	</div>
+	<nav class="navbar-sidebar2">
+		<ul class="list-unstyled navbar__list">
+			<li class="has-sub">
+				<a href="{% url 'account:lihat_user' %}">
+					<img src="{% static "images/icon/people.svg" %}" style="width:27px;">
+					User
+				</a>
+			</li>
+			<li class="has-sub">
+				<a href="{% url 'lowongan:lihat_low' %}">
+					<img src="{% static "images/icon/vacancy.svg" %}" style="width:27px;">
+					Lowongan
+				</a>
+			</li>
+			<li class="has-sub">
+				<a href="{% url 'account:lihat_cand' %}">
+					<img src="{% static "images/icon/recruitment.svg" %}" style="width:27px;">
+					Pelamar
+				</a>
+			</li>
+			<li class="has-sub">
+				<a href="#" class="js-arrow">
+					<img src="{% static "images/icon/test.svg" %}" style="width:27px;">
+					SPK
+					<span class="arrow">
+						<img src="{% static "images/icon/down-arrow.svg" %}" style="width:17px;">
+					</span>
+				</a>
+				<ul class="list-unstyled navbar__sub-list js-sub-list">
+					<li>
+						<a href="{% url 'kriteria:lihat_krit' %}">
+							<img src="{% static "images/icon/minus.svg" %}" style="width:15px;"> Kriteria
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'nilai:lihat_nilai' %}">
+							<img src="{% static "images/icon/minus.svg" %}" style="width:15px;"> Nilai
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'dss:lihat_hasil_akhir' %}">
+							<img src="{% static "images/icon/minus.svg" %}" style="width:15px;"> Hasil Akhir
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>

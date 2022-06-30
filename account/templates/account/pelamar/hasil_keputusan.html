@@ -1,0 +1,113 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% include "base_menu/sideP.html" %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% include "base_menu/side_mobileP.html" %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+							</div>
+							<hr>
+							{% if peringkat is True %}
+							{% if data.nama_lengkap.status == 'diterima' %}
+							<div class="au-card">
+								<div class="sufee-alert alert alert-success">
+									<center><span class="badge badge-pill badge-success">
+										<h5>- Diterima -</h5>
+									</span></center>
+									<hr>
+									<div>
+										<label class="col-md-2">Nama Lengkap</label>
+										: {{data.nama_lengkap}}
+									</div>
+									<div>
+										<label class="col-md-2">Nilai Akhir</label>
+										: {{data.nilai_akhir}}
+									</div>
+									<p class="col-md-12" style="text-align:justify;">
+										Selamat anda telah diterima menjadi pengajar di Griya Belajar Pintar Arrava. Nilai yang anda peroleh dapat dilihat dengan mengklik tombol berikut : <a href="{% url 'nilai:detail_nilai' data.nama_lengkap.id_candidate %}" class="btn btn-primary">Detail Nilai</a>
+									</p>
+								</div>
+							</div>
+							<br>
+							{% elif data.nama_lengkap.status == 'ditolak' %}
+							<div class="au-card">
+								<div class="sufee-alert alert alert-danger">
+									<center><span class="badge badge-pill badge-danger">
+										<h5>- Tidak Diterima -</h5>
+									</span></center>
+									<hr>
+									<div>
+										<label class="col-md-2">Nama Lengkap</label>
+										: {{data.nama_lengkap}}
+									</div>
+									<div>
+										<label class="col-md-2">Nilai Akhir</label>
+										: {{data.nilai_akhir}}
+									</div>
+									<p class="col-md-12" style="text-align:justify;">
+										Mohon maaf anda tidak diterima menjadi pengajar. Nilai yang anda peroleh dapat dilihat dengan mengklik tombol berikut : <a href="{% url 'nilai:detail_nilai' data.nama_lengkap.id_candidate %}" class="btn btn-primary">Detail Nilai</a>
+									</p>
+								</div>
+							</div>
+							<br>
+							{% else %}
+							<div class="au-card">
+								<div class="sufee-alert alert alert-warning">
+									<center><span class="badge badge-pill badge-warning">
+										<h5>- Tahap Perhitungan Nilai -</h5>
+									</span></center>
+									<hr>
+									<p class="col-md-12" style="text-align:center;">
+										Proses pemilihan pengajar masih berlangsung. Data penilaian anda masih dalam proses perhitungan.
+									</p>
+								</div>
+							</div>
+							<br><br><br><br><br>
+							{% endif %}
+							{% else %}
+							<div class="au-card">
+								<div class="sufee-alert alert alert-warning">
+									<center><span class="badge badge-pill badge-warning">
+										<h5>- Tahap Perhitungan Nilai -</h5>
+									</span></center>
+									<hr>
+									<p class="col-md-12" style="text-align:center;">
+										Proses pemilihan pengajar masih berlangsung. Data penilaian anda masih dalam proses perhitungan.
+									</p>
+								</div>
+							</div>
+							<br><br><br><br><br>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

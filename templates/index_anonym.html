@@ -1,0 +1,78 @@
+{% extends "base_home/base.html" %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page_wrapper">
+	{% include "base_home/header.html" %}
+
+	{% include "base_home/header_mobile.html" %}
+
+	<div class="page-content--bgf7">
+		{% include "base_home/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section class="p-t-20">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="default-tab">
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="nav-beranda-tab" data-toggle="tab" href="#nav-beranda" role="tab" aria-controls="nav-beranda"
+									aria-selected="true">Beranda</a>
+									<a class="nav-item nav-link" id="nav-tentang-tab" data-toggle="tab" href="#nav-tentang" role="tab" aria-controls="nav-tentang"
+									aria-selected="false">Tentang</a>
+									<a class="nav-item nav-link" id="nav-akademik-tab" data-toggle="tab" href="#nav-akademik" role="tab" aria-controls="nav-akademik"
+									aria-selected="false">Akademik</a>
+								</div>
+							</nav>
+							<div class="tab-content pl-3 pt-2" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-beranda" role="tabpanel" aria-labelledby="nav-beranda-tab">
+									<h5>Sejarah</h5>
+									<p style="text-align:justify;">Griya Belajar Pintar Arrava merupakan salah satu lembaga bimbingan belajar yang berada di Kabupaten Jember. Arrava didirikan di Jember pada tahun 2010. Saat ini Arrava mempunyai pengajar sebanyak 15 orang dan dibantu oleh 2 orang staf tata usaha. Jumlah siswa yang menjadi peserta bimbingan di Arrava mencapai 526 siswa. Keunggulan yang dimiliki Arrava dibandingkan lembaga bimbel lain adalah adanya program pendidikan sikap dan perilaku. Tujuan dari program tersebut agar siswa bimbingannya tidak hanya cerdas dalam pendidikan akademik saja, tetapi juga mempunyai sikap dan perilaku yang baik dalam bermasyarakat.</p>
+									<br><br><br><br>
+								</div>
+								<div class="tab-pane fade" id="nav-tentang" role="tabpanel" aria-labelledby="nav-tentang-tab">
+									<h5>Visi</h5>
+									<p>
+										Menjadi lembaga bimbingan belajar yang profesional, unggul, dan terpercaya.
+									</p>
+									<br>
+									<h5>Misi</h5>
+									<ul style="margin-left:20px; list-style-type:square;">
+										<li>Mewujudkan bimbingan belajar yang berskala nasional dan kebanggaan masyarakat.</li>
+										<li>Mendidik siswa menuju prestasi puncak berbasis pembinaan untuk melahirkan siswa yang berbudi dan berprestasi di tingkat lokal, nasional dan global.</li>
+										<li>Meningkatkan budaya belajar dan mutu pendidikan nasional.</li>
+										<li>Meningkatkan dan mengembangkan inovasi pembelajaran berbasis teknologi.</li>
+										<li>Meningkatkan jalinan kemitraan  dan sekaligus sebagai mitra sejati setiap generasi.</li>
+									</ul>
+									<br>
+								</div>
+								<div class="tab-pane fade" id="nav-akademik" role="tabpanel" aria-labelledby="nav-akademik-tab">
+									<h5>Kurikulum</h5>
+									<p>Menggunakan kurikulum yang ditetapkan oleh Dinas Pendidikan Nasional sesuai dengan kurikulum yang berlaku pada pendidikan formal.</p>
+									<br>
+									<h5>Jasa Bimbingan</h5>
+									<ul style="margin-left:20px; list-style-type:circle;">
+										<li>TK atau Pra-SD</li>
+										<li>SD Kelas 1 - 6</li>
+										<li>SMP Kelas 7 - 9</li>
+										<li>SMA Kelas 10 - 11</li>
+										<li>Privat dan Semi-Privat</li>
+										<li>Taman Pendidikan Al-Quran</li>
+									</ul>
+								</div>
+							</div>
+							<br><br><br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>
+{% endblock isi %}

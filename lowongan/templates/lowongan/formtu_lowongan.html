@@ -1,0 +1,61 @@
+{% extends "base_menu/base.html" %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-content--bge5">
+	<br><br>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<div class="card">
+				<form method="POST">
+					<div class="card-header">
+						<strong>{{judul_isi}}</strong> Forms
+					</div>
+					<div class="card-body card-block">
+						{% csrf_token %}
+						<div class="form-group col-md-12">
+							{{data.mata_pelajaran.errors}}
+							{{data.mata_pelajaran.label_tag}}
+							{{data.mata_pelajaran}}
+						</div>
+						<div class="form-group col-md-12">
+							{{data.jenjang.errors}}
+							{{data.jenjang.label_tag}}
+							{{data.jenjang}}
+						</div>
+						<div class="form-group col-md-12">
+							{{data.tgl_buka.errors}}
+							{{data.tgl_buka.label_tag}}
+							<br>
+							{{data.tgl_buka}}
+						</div>
+						<div class="form-group col-md-12">
+							{{data.tgl_tutup.errors}}
+							{{data.tgl_tutup.label_tag}}
+							<br>
+							{{data.tgl_tutup}}
+						</div>
+					</div>
+					<div class="card-footer form-group">
+						{% if request.user.is_staff is True %}
+						<button type="submit" class="btn btn-outline-success">
+							Selesai
+						</button>
+						<a href="javascript:history.back()" class="btn btn-outline-danger">
+							Batal
+						</a>
+						{% elif request.user.is_leader is True %}
+						<a href="javascript:history.back()" class="btn btn-outline-warning">
+							Kembali
+						</a>
+						{% endif %}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}

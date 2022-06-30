@@ -1,0 +1,111 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}	
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% if request.user.is_staff is True %}
+	{% include "base_menu/sideA.html" %}
+	{% elif request.user.is_leader is True %}
+	{% include "base_menu/sideL.html" %}
+	{% endif %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% if request.user.is_staff is True %}
+		{% include "base_menu/side_mobileA.html" %}
+		{% elif request.user.is_leader is True %}
+		{% include "base_menu/side_mobileL.html" %}
+		{% endif %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+								{% if request.user.is_staff is True %}
+								{% if status == 'dibuka' %}
+								{% if verif is False %}
+								<div>
+									<a href="{% url 'account:tambah_cand' %}" class="btn btn-primary" title="Tambah Data Pelamar">
+										<img src="{% static "images/icon/adds.svg" %}" style="width:20px;"> Tambah
+									</a>
+								</div>	
+								{% endif %}
+								{% endif %}
+								{% endif %}
+							</div>
+							<hr>
+							<div class="table-responsive table--no-card m-b-30">
+								<table class="table table-borderless table-striped table-earning">
+									<thead class="">
+										<tr>
+											<th>ID</th>
+											<th>Email</th>
+											<th>Nama</th>
+											<th>Kelamin</th>
+											<th>Tgl Lahir</th>
+											{% if request.user.is_staff is True %}
+											<th>Aksi</th>
+											{% else %}
+											<th scope="col">Detail</th>
+											{% endif %}
+										</tr>
+									</thead>
+									<tbody class="">
+										{% for data in tabel %}
+										<tr>
+											<td>{{data.id_candidate}}</td>
+											<td class="desc">{{data.cand_mail}}</td>
+											<td>{{data.nama_depan}} {{data.nama_belakang}}</td>
+											<td>{{data.jenis_kelamin}}</td>
+											<td>{{data.tgl_lahir}}</td>
+											{% if request.user.is_staff is True %}
+											{% if verif is True %}
+											<td>
+												<span class="status--process">Selesai</span>
+											</td>
+											{% else %}
+											<td>
+												<a href="{% url 'account:ubah_cand' data.id_candidate %}" class="btn btn-outline-warning" title="Ubah Data Pelamar">
+													<img src="{% static "images/icon/loop.svg" %}" style="width:15px;">
+												</a>
+												<a href="{% url 'account:hapus_cand' data.id_candidate %}" class="btn btn-outline-danger" title="Hapus Data Pelamar">
+													<img src="{% static "images/icon/delete.svg" %}" style="width:15px;">
+												</a>
+											</td>
+											{% endif %}
+											{% elif request.user.is_leader is True %}
+											<td>
+												<a href="{% url 'account:detail_cand' data.id_candidate %}" class="btn btn-outline-secondary" title="Detail Data Pelamar">
+													<img src="{% static "images/icon/info.svg" %}" style="width:15px;">
+												</a>
+											</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

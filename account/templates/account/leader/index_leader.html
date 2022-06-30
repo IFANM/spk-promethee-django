@@ -1,0 +1,47 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}	
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% include "base_menu/sideL.html" %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% include "base_menu/side_mobileL.html" %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+							</div>
+							<hr>
+							<div class="au-card">
+								<p style="text-align:justify;">
+									Sistem pendukung keputusan pemilihan pengajar merupakan sebuah sistem yang membantu manajemen Griya Belajar Pintar Arrava dalam memilih pengajar baru. Metode yang digunakan dalam proses pemilihan pengajar adalah metode <i>Promethee</i>.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br><br><br><br><br>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

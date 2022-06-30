@@ -1,0 +1,140 @@
+{% extends "base_home/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}	
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page_wrapper">
+	{% include "base_home/header.html" %}
+
+	{% include "base_home/header_mobile.html" %}
+
+	<div class="page-content--bgf7">
+		{% include "base_home/breadcrumb.html" %}
+
+		<!-- STATISTIC-->
+		<section class="statistic statistic2">
+			<div class="container">
+				<div class="row">
+					{% if lowongan is True %}
+					<div class="col-md-12">
+						{% if status == 'ditutup' %}
+						<center>
+							<a href="#" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+								<div class="col">
+									<h4 style="color:white;">Daftar</h4>
+								</div>
+							</a>
+						</center>
+						{% else %}
+						<center>
+							<a href="{% url 'registrasi' %}" class="btn btn-primary">
+								<div class="col">
+									<h4 style="color:white;">Daftar</h4>
+								</div>
+							</a>
+						</center>
+						{% endif %}
+						<hr>
+					</div>
+					<div class="col-md-6 col-lg-3">
+						<div class="statistic__item statistic__item--blue">
+							<span class="desc">Mata Pelajaran</span>
+							<h2 class="number">{{data.mata_pelajaran}}</h2>
+							<div class="icon">
+								<i class="">
+									<img src="{% static "images/icon/books.svg" %}" style="width:120px;">
+								</i>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3">
+						<div class="statistic__item statistic__item--orange">
+							<span class="desc">Jenjang</span>
+							<h2 class="number">{{data.jenjang}}</h2>
+							<div class="icon">
+								<i class="">
+									<img src="{% static "images/icon/level.svg" %}" style="width:140px;">
+								</i>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3">
+						<div class="statistic__item statistic__item--green">
+							<span class="desc">Tanggal Dibuka</span>
+							<h2 class="number">{{data.tgl_buka}}</h2>
+							<div class="icon">
+								<i class="">
+									<img src="{% static "images/icon/calendar.svg" %}" style="width:120px;">
+								</i>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3">
+						<div class="statistic__item statistic__item--red">
+							<span class="desc">Tanggal Ditutup</span>
+							<h2 class="number">{{data.tgl_tutup}}</h2>
+							<div class="icon">
+								<i class="">
+									<img src="{% static "images/icon/calendar.svg" %}" style="width:120px;">
+								</i>
+							</div>
+						</div>
+						<br>
+						<br>
+						<br>
+					</div>
+					{% else %}
+					<div class="col-md-8 offset-md-2">
+						<div class="alert alert-danger" role="alert">
+							<center>
+								<h3 class="alert-heading">
+									<span class="badge badge-pill badge-danger">Belum Dibuka!</span>
+								</h3>
+							</center>
+							<br>
+							<p style="text-align:justify;">Mohon maaf untuk sementara ini kami belum membuka lowongan bagi pelamar yang ingin mendaftar sebagai pengajar baru di LBB Arrava.</p>
+							<hr>
+							<p class="mb-0" style="text-align:justify;">Silahkan cek selalu website kami untuk mengetahui info lowongan pelamar selanjutnya.</p>
+						</div>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</section>
+
+	</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Informasi</h5>
+			</div>
+			{% csrf_token %}
+			<div class="modal-body">
+				<div class="alert alert-danger col-md-12">
+					<center>
+						Maaf pendaftaran telah ditutup.
+					</center>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+					Oke
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}

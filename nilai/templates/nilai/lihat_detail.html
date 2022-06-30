@@ -1,0 +1,96 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% if request.user.is_leader is True %}
+	{% include "base_menu/sideL.html" %}
+	{% else %}
+	{% include "base_menu/sideP.html" %}
+	{% endif %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% if request.user.is_leader is True %}
+		{% include "base_menu/side_mobileL.html" %}
+		{% else %}
+		{% include "base_menu/side_mobileP.html" %}
+		{% endif %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+								<div>
+									{% if request.user.is_leader is True %}
+									<a href="{% url 'dss:lihat_peringkat' %}" class="btn btn-warning" title="Kembali">
+										<img src="{% static "images/icon/return.svg" %}" style="width:25px;">
+									</a>
+									{% else %}
+									{% if request.user.candidate.status == 'diterima' %}
+									<a href="{% url 'dss:cetak_surat' cand.id_candidate %}" class="btn btn-secondary" title="Cetak Surat Keputusan">
+										<img src="{% static "images/icon/printing.svg" %}" style="width:25px;">
+										Cetak
+									</a>
+									{% endif %}
+									<a href="{% url 'account:hasil_keputusan' %}" class="btn btn-warning" title="Kembali">
+										<img src="{% static "images/icon/return.svg" %}" style="width:25px;">
+									</a>
+									{% endif %}
+								</div>
+							</div>
+							<hr>
+							<div class="table-responsive table--no-card m-b-30">
+								<table class="table table-borderless table-striped table-earning">
+									<thead class="">
+										<tr>
+											{% if request.user.is_leader is True %}
+											<th colspan="2">Alternatif - Nama Pelamar</th>
+											{% else %}
+											<th>No</th>
+											{% endif %}
+											<th>Kriteria</th>
+											<th>Nilai</th>
+										</tr>
+									</thead>
+									<tbody class="">
+										{% for data in tabel %}
+										<tr>
+											{% if request.user.is_leader is True %}
+											<td>{{data.nama_alternatif.id_candidate}}</td>
+											<td>{{data.nama_alternatif}}</td>
+											{% else %}
+											<td>{{forloop.counter}}</td>
+											{% endif %}
+											<td>{{data.nama_kriteria}}</td>
+											<td>{{data.nilai}}</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

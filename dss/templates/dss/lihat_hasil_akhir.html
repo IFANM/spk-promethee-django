@@ -1,0 +1,115 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% if request.user.is_staff is True %}
+	{% include "base_menu/sideA.html" %}
+	{% elif request.user.is_leader is True %}
+	{% include "base_menu/sideL.html" %}
+	{% endif %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% if request.user.is_staff is True %}
+		{% include "base_menu/side_mobileA.html" %}
+		{% elif request.user.is_leader is True %}
+		{% include "base_menu/side_mobileL.html" %}
+		{% endif %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+								{% if request.user.is_leader is True %}
+								{% if peringkat is True %}
+								<div>
+									<a href="{% url 'dss:lihat_peringkat' %}" class="btn btn-primary" title="Lihat Peringkat">
+										<img src="{% static "images/icon/notepad.svg" %}" style="width:25px;"> Lihat
+									</a>
+								</div>
+								{% else %}
+								{% if verifikasi is True %}
+								<form method="POST" action="{% url 'dss:hitung_peringkat' %}">
+									{% csrf_token %}
+									<a href="{% url 'dss:cek_ulang' %}" class="btn btn-danger" title="Cek Ulang Verifikasi Data">
+										<img src="{% static "images/icon/delete-white.svg" %}" style="width:25px;"> Cek Ulang
+									</a>
+									<button type="submit" name="hitung" class="btn btn-success" title="Hitung Peringkat">
+										<img src="{% static "images/icon/notepad.svg" %}" style="width:25px;">
+										Hitung
+									</button>
+								</form>
+								{% else %}
+								<span class="status--denied">Proses Verifikasi</span>
+								{% endif %}
+								{% endif %}
+								{% else %}
+								{% if verifikasi is False %}
+								<form method="POST">
+									{% csrf_token %}
+									<button type="submit" name="verifikasi" class="btn btn-success" title="Verifikasi Data">
+										<img src="{% static "images/icon/notepad.svg" %}" style="width:25px;">
+										Verifikasi
+									</button>
+								</form>
+								{% else %}
+								<span class="status--success">Verifikasi Selesai</span>
+								{% endif %}
+								{% endif %}
+							</div>
+							<hr>
+							<div class="table-responsive table--no-card m-b-30">
+								<table class="table table-borderless table-striped table-earning">
+									<thead class="">
+										<tr>
+											<th rowspan="2" colspan="2" style="text-align:center;">Kriteria</th>
+											<th colspan="{{jmlh}}" style="text-align:center;">Alternatif</th>
+											<th rowspan="2">Kaidah</th>
+											<th>Tipe</th>
+											<th colspan="2">Parameter</th>
+										</tr>
+										<tr>
+											{% for data in alt %}
+											<th>{{data.id_candidate}}</th>
+											{% endfor %}
+											<th>Preferensi</th>
+											<th>P</th>
+											<th>Q</th>
+										</tr>
+									</thead>
+									<tbody class="">
+										{% for i in matriks %}
+										<tr>
+											{% for j in i %}
+											<td>{{j}}</td>
+											{% endfor %}
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

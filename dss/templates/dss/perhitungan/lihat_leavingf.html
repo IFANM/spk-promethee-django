@@ -1,0 +1,79 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% if request.user.is_staff is True %}
+	{% include "base_menu/sideA.html" %}
+	{% elif request.user.is_leader is True %}
+	{% include "base_menu/sideL.html" %}
+	{% endif %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% if request.user.is_staff is True %}
+		{% include "base_menu/side_mobileA.html" %}
+		{% elif request.user.is_leader is True %}
+		{% include "base_menu/side_mobileL.html" %}
+		{% endif %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h3>{{judul_isi}}</h3>
+								<div>
+									<a href="{% url 'dss:lihat_total_ip' %}" class="btn btn-primary" title="Sebelumnya">
+										<img src="{% static "images/icon/previous.svg" %}" style="width:25px;">
+									</a>
+									<a href="{% url 'dss:lihat_enteringf' %}" class="btn btn-primary" title="Selanjutnya">
+										<img src="{% static "images/icon/next.svg" %}" style="width:25px;">
+									</a>
+								</div>
+							</div>
+							<hr>
+							<div class="table-responsive table--no-card m-b-30">
+								<table class="table table-borderless table-striped table-earning">
+									<thead class="">
+										<tr>
+											<th>Alternatif</th>
+											{% for data in alt %}
+											<th>{{data.id_candidate}}</th>
+											{% endfor %}
+											<th>Leaving Flow</th>
+										</tr>
+									</thead>
+									<tbody class="">
+										{% for i in matriks %}
+										<tr>
+											{% for j in i %}
+											<td>{{j}}</td>
+											{% endfor %}
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

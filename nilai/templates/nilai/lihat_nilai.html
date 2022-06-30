@@ -1,0 +1,104 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% if request.user.is_staff is True %}
+	{% include "base_menu/sideA.html" %}
+	{% elif request.user.is_leader is True %}
+	{% include "base_menu/sideL.html" %}
+	{% endif %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% if request.user.is_staff is True %}
+		{% include "base_menu/side_mobileA.html" %}
+		{% elif request.user.is_leader is True %}
+		{% include "base_menu/side_mobileL.html" %}
+		{% endif %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+								{% if request.user.is_staff is True %}
+								{% if jmlh_nilai < jmlh_data %}
+								<a href="{% url 'nilai:tambah_nilai' %}" class="btn btn-primary" title="Tambah Data Nilai">
+									<img src="{% static "images/icon/adds.svg" %}" style="width:25px;"> Tambah
+								</a>
+								{% endif %}
+								{% endif %}
+							</div>
+							{% if jmlh_nilai < jmlh_data %}
+							<div class="sufee-alert alert with-close alert-warning alert-dismissible fade show">
+								Nilai belum lengkap, masih kurang <b>{{kurang}}</b> data nilai. <i>Anda tidak dapat mengakses halaman <b>Hasil Akhir</b>.</i>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							{% endif %}
+							<hr>
+							<div class="table-responsive table--no-card m-b-30">
+								<table class="table table-borderless table-striped table-earning">
+									<thead class="">
+										<tr>
+											<th colspan="2">Alternatif - Nama Pelamar</th>
+											<th>Kriteria</th>
+											<th>Nilai</th>
+											{% if request.user.is_staff is True %}
+											<th>Aksi</th>
+											{% endif %}
+										</tr>
+									</thead>
+									<tbody class="">
+										{% for data in tabel %}
+										<tr>
+											<td>{{data.nama_alternatif.id_candidate}}</td>
+											<td>{{data.nama_alternatif}}</td>
+											<td>{{data.nama_kriteria}}</td>
+											<td>{{data.nilai}}</td>
+											{% if request.user.is_staff is True %}
+											{% if verif is True %}
+											<td>
+												<span class="status--process">Selesai</span>
+											</td>
+											{% else %}
+											<td>
+												<a href="{% url 'nilai:ubah_nilai' data.id_nilai %}" class="btn btn-outline-warning" title="Ubah Data Nilai">
+													<img src="{% static "images/icon/loop.svg" %}" style="width:15px;">
+												</a>
+												<a href="{% url 'nilai:hapus_nilai' data.id_nilai %}" class="btn btn-outline-danger" title="Hapus Data Nilai">
+													<img src="{% static "images/icon/delete.svg" %}" style="width:15px;">
+												</a>
+											</td>
+											{% endif %}
+											{% endif %}
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+{% endblock isi %}

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>	{{judul}}</title>
+
+	<style type="text/css">
+	@page {
+		size: a4 portrait;
+
+		@frame header_frame {
+			-pdf-frame-content: header;
+			left: 3cm;
+			width: 15cm;
+			top: 3cm;
+			height: 2.5cm;
+			/*-pdf-frame-border: 1;*/
+		}
+
+		@frame content_judul {
+			-pdf-frame-content: judul;
+			left: 3cm;
+			width: 15cm;
+			top: 5.5cm;
+			height: 1cm;
+			/*-pdf-frame-border: 1;*/
+		}
+
+		@frame content_prof1 {
+			-pdf-frame-content: prof1;
+			left: 3cm;
+			width: 3cm;
+			top: 7cm;
+			height: 3cm;
+			/*-pdf-frame-border: 1;*/
+		}
+
+		@frame content_prof2 {
+			-pdf-frame-content: prof2;
+			left: 6cm;
+			width: 12cm;
+			top: 7cm;
+			height: 3cm;
+			/*-pdf-frame-border: 1;*/
+		}
+
+		@frame content_isi {
+			-pdf-frame-content: isi;
+			left: 3cm;
+			width: 15cm;
+			top: 10cm;
+			height: 16cm;
+			/*-pdf-frame-border: 1;*/
+		}
+	}
+
+	.container {
+		font-family: Times New Roman;
+		font-size: 12px;
+	}
+
+	.kop {
+		text-align: center;
+	}
+
+	.data_profil {
+		/*margin-top: 3px;*/
+		/*margin-bottom: 3px;*/
+	}
+
+	.table th,
+	.table td {
+		padding-top: 5px;
+		padding-bottom: 1px;
+		border: 1px solid #000;
+		text-align: center;
+	}
+
+	.table thead th {
+		border-bottom: 2px solid #000;
+	}
+
+	.penutup {
+		text-align: right;
+	}
+
+	.list {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="kop">
+			<h3>GRIYA BELAJAR PINTAR ARRAVA</h3>
+			<h5>Jalan Teuku Umar No. 84, Kebonsari, Sumbersari, Jember</h5>
+			<h5>Laman : www.arrava.ac.id</h5>
+		</div>
+		<div id="judul" class="kop">
+			<hr>
+			<h4>Surat Keputusan</h4>
+		</div>
+		<div id="prof1" class="data_profil">
+			<div>Nama</div>
+			<div>Email</div>
+			<div>Mata Pelajaran</div>
+			<div>Jenjang</div>
+			<div>Nilai Akhir</div>
+		</div>
+		<div id="prof2" class="data_profil">
+			<div>: {{data1.nama_depan}} {{data1.nama_belakang}}</div>
+			<div>: {{data1.cand_mail}}"</div>
+			<div>: {{data3.mata_pelajaran}}</div>
+			<div>: {{data3.jenjang}}</div>
+			<div>: {{data2.nilai_akhir}}</div>
+		</div>
+		<div id="isi">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Kriteria Penilaian</th>
+						<th>Nilai</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for tab in tabel %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td>{{tab.nama_kriteria}}</td>
+						<td>{{tab.nilai}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<br>
+			<div class="penutup">
+				<div>Jember, {{today}}</div>
+				<div>Pimpinan Arrava</div>
+				<br><br><br><br>
+				<div>Ahmad Rofi'i, S.Pd</div>
+			</div>
+			<br><br>
+			<div>
+				<i>Diharapkan menyertakan lampiran:</i>
+			</div>
+			<div>
+				<ol class="list">
+					<i>
+						<li>Fotocopy KTP</li>
+						<li>Fotocopy Ijazah</li>
+					</i>
+				</ol>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

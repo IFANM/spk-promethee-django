@@ -1,0 +1,76 @@
+{% extends "base_menu/base.html" %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-content--bge5">
+	<br><br><br>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<div class="card">
+				<form method="POST">
+					<div class="card-header">
+						<strong>{{judul_isi}}</strong> Forms
+					</div>
+					<div class="card-body card-block">
+						{% csrf_token %}
+						<div class="row col-md-12">
+							<div class="form-group col-md-6">
+								{{data.id_kriteria.errors}}
+								{{data.id_kriteria.label_tag}}
+								{{data.id_kriteria}}
+							</div>
+							<div class="form-group col-md-6">
+								{{data.nama_kriteria.errors}}
+								{{data.nama_kriteria.label_tag}}
+								{{data.nama_kriteria}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-12">
+								{{data.keterangan.errors}}
+								{{data.keterangan.label_tag}}
+								{{data.keterangan}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-6">
+								{{data.kaidah.errors}}
+								{{data.kaidah.label_tag}}
+								{{data.kaidah}}
+							</div>
+							<div class="form-group col-md-6">
+								{{data.tipe_preferensi.errors}}
+								{{data.tipe_preferensi.label_tag}}
+								{{data.tipe_preferensi}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-6">
+								{{data.parameter_p.errors}}
+								{{data.parameter_p.label_tag}}
+								{{data.parameter_p}}
+							</div>
+							<div class="form-group col-md-6">
+								{{data.parameter_q.errors}}
+								{{data.parameter_q.label_tag}}
+								{{data.parameter_q}}
+							</div>
+						</div>
+					</div>
+					<div class="card-footer form-group">
+						<button type="submit" class="btn btn-outline-success">
+							Selesai
+						</button>
+						<a href="javascript:history.back()" class="btn btn-outline-danger">
+							Batal
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}

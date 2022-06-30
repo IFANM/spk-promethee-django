@@ -1,0 +1,68 @@
+{% extends "base_menu/base.html" %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-content--bge5">
+	<br><br><br>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<div class="card">
+				<form method="POST">
+					<div class="card-header">
+						<strong>{{judul_isi}}</strong> Forms
+					</div>
+					<div class="card-body card-block">
+						{% csrf_token %}
+						<div class="form-group col-md-12">
+							{{data.nama_alternatif.errors}}
+							{{data.nama_alternatif.label_tag}}
+							{{data.nama_alternatif}}
+						</div>
+						<div class="form-group col-md-12">
+							{{data.nama_kriteria.errors}}
+							{{data.nama_kriteria.label_tag}}
+							{{data.nama_kriteria}}
+						</div>
+						<div class="form-group col-md-12">
+							{{data.nilai.errors}}
+							{{data.nilai.label_tag}}
+							{{data.nilai}}
+
+							<div id="k01" style="display: none;">
+								<input type="text" readonly class="form-control" value="{{dk01}}"/>
+							</div>
+							<div id="k02" style="display: none;">
+								<input type="text" readonly class="form-control" value="{{dk02}}"/>
+							</div>
+							<div id="k03" style="display: none;">
+								<input type="text" readonly class="form-control" value="{{dk03}}"/>
+							</div>
+							<div id="k04" style="display: none;">
+								<input type="text" readonly class="form-control" value="{{dk04}}"/>
+							</div>
+							<div id="k05" style="display: none;">
+								<input type="text" readonly class="form-control" value="{{dk05}}"/>
+							</div>
+
+						</div>
+					</div>
+					<div class="card-footer form-group">
+						<button type="submit" class="btn btn-outline-success">
+							Selesai
+						</button>
+						<a href="javascript:history.back()" class="btn btn-outline-danger">
+							Batal
+						</a>
+					</div>
+				</form>
+				{% for mess in messages %}
+				<p id="messages">{{mess}}</p>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}

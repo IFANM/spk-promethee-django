@@ -1,0 +1,141 @@
+{% extends "base_menu/base.html" %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-content--bge5">
+	<br>
+	<div class="container">
+		<div class="col-md-10 offset-md-1">
+			<div class="card">
+				<form method="POST" enctype="multipart/form-data">
+					<div class="card-header">
+						<strong>{{judul_isi}}</strong> Forms
+					</div>
+					<div class="card-body card-block">
+						{% csrf_token %}
+						<div class="row col-md-12">
+							<div class="form-group col-md-10">
+								{{data1.id_candidate.errors}}
+								{{data1.id_candidate.label_tag}}
+								{{data1.id_candidate}}
+							</div>
+							<div class="form-group col-md-2">
+								<label>Email</label>
+								<div class="">
+									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Ganti Email</button>
+								</div>
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-6">
+								{{data1.nama_depan.errors}}
+								{{data1.nama_depan.label_tag}}
+								{{data1.nama_depan}}
+							</div>
+							<div class="form-group col-md-6">
+								{{data1.nama_belakang.errors}}
+								{{data1.nama_belakang.label_tag}}
+								{{data1.nama_belakang}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-4">
+								{{data1.jenis_kelamin.label_tag}}
+								{% for jenis_kelamin in data1.jenis_kelamin %}
+								<div class="custom-control custom-radio">
+									{{jenis_kelamin.tag}}
+									<label class="custom-control-label" for="{{jenis_kelamin.id_for_label}}">
+										{{jenis_kelamin.choice_label}}
+									</label>
+								</div>
+								{% endfor %}
+							</div>
+							<div class="form-group col-md-8">
+								{{data1.tgl_lahir.errors}}
+								{{data1.tgl_lahir.label_tag}}
+								<div class="form-row">
+									{{data1.tgl_lahir}}
+								</div>
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-4">
+								{{data1.no_telp.errors}}
+								{{data1.no_telp.label_tag}}
+								{{data1.no_telp}}
+							</div>
+							<div class="form-group col-md-8">
+								{{data1.alamat.errors}}
+								{{data1.alamat.label_tag}}
+								{{data1.alamat}}
+							</div>
+						</div>
+						<div class="row col-md-12">
+							<div class="form-group col-md-6">
+								{{data1.foto_profil.errors}}
+								{{data1.foto_profil.label_tag}}
+								{{data1.foto_profil}}
+							</div>
+							<div class="form-group col-md-6">
+								{{data1.cv.errors}}
+								{{data1.cv.label_tag}}
+								{{data1.cv}}
+							</div>
+						</div>
+					</div>
+					<div class="card-footer form-group">
+						<button type="submit" name="ubah_candidate" class="btn btn-outline-success">
+							Selesai
+						</button>
+						<a href="javascript:history.back()" class="btn btn-outline-danger">
+							Batal
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form method="POST">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Email Akun</h5> Forms
+				</div>
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="form-group col-md-12">
+						{{data2.email.errors}}
+						{{data2.email.label_tag}}
+						<div class="input-group">
+							<label class="input-group-addon col-md-3">Email</label>
+							{{data2.email}}
+						</div>
+					</div>
+					<div class="form-group col-md-12">
+						<label>Password</label>
+						<div class="input-group">
+							<label class="input-group-addon col-md-3">Password</label>
+							<a href="{% url 'password_change' %}" class="form-control btn btn-primary">Ganti</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" name="ubah_user" class="btn btn-outline-success">
+						Selesai
+					</button>
+					<button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+						Batal
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock isi %}

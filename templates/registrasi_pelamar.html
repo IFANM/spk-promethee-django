@@ -1,0 +1,122 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	<div class="page-content">
+		<br>
+		<div class="container">
+			<div class="col-md-10 offset-md-1">
+				<div class="card">
+					<form method="POST" enctype="multipart/form-data">
+						<div class="card-header">
+							<strong>{{judul_isi}}</strong> Forms
+						</div>
+						<div class="card-body card-block">
+							{% csrf_token %}
+							<div class="row col-md-12">
+								<div class="form-group col-md-6">
+									{{data2.id_candidate.errors}}
+									{{data2.id_candidate.label_tag}}
+									{{data2.id_candidate}}
+								</div>
+								<div class="form-group col-md-6">
+									{{data1.email.errors}}
+									{{data1.email.label_tag}}
+									{{data1.email}}
+								</div>
+							</div>
+							<div class="row col-md-12">
+								<div class="form-group col-md-6">
+									{{data1.password1.errors}}
+									{{data1.password1.label_tag}}
+									{{data1.password1}}
+								</div>
+								<div class="form-group col-md-6">
+									{{data1.password2.errors}}
+									{{data1.password2.label_tag}}
+									{{data1.password2}}
+								</div>
+							</div>
+							<div class="row col-md-12">
+								<div class="form-group col-md-6">
+									{{data2.nama_depan.errors}}
+									{{data2.nama_depan.label_tag}}
+									{{data2.nama_depan}}
+								</div>
+								<div class="form-group col-md-6">
+									{{data2.nama_belakang.errors}}
+									{{data2.nama_belakang.label_tag}}
+									{{data2.nama_belakang}}
+								</div>
+							</div>
+							<div class="row col-md-12">
+								<div class="form-group col-md-4">
+									{{data2.jenis_kelamin.label_tag}}
+									{% for jenis_kelamin in data2.jenis_kelamin %}
+									<div class="custom-control custom-radio">
+										{{jenis_kelamin.tag}}
+										<label class="custom-control-label" for="{{jenis_kelamin.id_for_label}}">
+											{{jenis_kelamin.choice_label}}
+										</label>
+									</div>
+									{% endfor %}
+								</div>
+								<div class="form-group col-md-8">
+									{{data2.tgl_lahir.errors}}
+									{{data2.tgl_lahir.label_tag}}
+									<div class="form-row">
+										{{data2.tgl_lahir}}
+									</div>
+								</div>
+							</div>
+							<div class="row col-md-12">
+								<div class="form-group col-md-4">
+									{{data2.no_telp.errors}}
+									{{data2.no_telp.label_tag}}
+									{{data2.no_telp}}
+								</div>
+								<div class="form-group col-md-8">
+									{{data2.alamat.errors}}
+									{{data2.alamat.label_tag}}
+									{{data2.alamat}}
+								</div>
+							</div>
+							<div class="row col-md-12">
+								<div class="form-group col-md-6">
+									{{data2.foto_profil.errors}}
+									{{data2.foto_profil.label_tag}}
+									<br>
+									{{data2.foto_profil}}
+								</div>
+								<div class="form-group col-md-6">
+									{{data2.cv.errors}}
+									{{data2.cv.label_tag}}
+									<br>
+									{{data2.cv}}
+								</div>
+							</div>
+						</div>
+						{% for mess in messages %}
+						<p id="messages">{{mess}}</p>
+						{% endfor %}
+						<div class="card-footer form-group">
+							<button type="submit" class="btn btn-outline-success">
+								Selesai
+							</button>
+							<a href="javascript:history.back()" class="btn btn-outline-danger">
+								Batal
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}

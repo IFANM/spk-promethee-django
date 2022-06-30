@@ -1,0 +1,140 @@
+{% extends "base_menu/base.html" %}
+
+{% load static %}
+
+{% block halaman %}
+{{judul}}
+{% endblock halaman %}
+
+{% block isi %}
+<div class="page-wrapper">
+	{% if request.user.is_staff is True %}
+	{% include "base_menu/sideA.html" %}
+	{% elif request.user.is_leader is True %}
+	{% include "base_menu/sideL.html" %}
+	{% endif %}
+
+	<div class="page-container2">
+		{% include "base_menu/header.html" %}
+
+		{% if request.user.is_staff is True %}
+		{% include "base_menu/side_mobileA.html" %}
+		{% elif request.user.is_leader is True %}
+		{% include "base_menu/side_mobileL.html" %}
+		{% endif %}
+
+		{% include "base_menu/breadcrumb.html" %}
+
+		<!-- CONTENT -->
+		<section>
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<br>
+					<div class="row">
+						<div class="col-md-12">				
+							<div class="overview-wrap">
+								<h2 class="title-1 m-b-10">{{judul_isi}}</h2>
+								<div>
+									{% if seleksi is True %}
+									<a href="#" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" title="Cetak Peringkat">
+										<img src="{% static "images/icon/printing.svg" %}" style="width:25px;">
+										Cetak
+									</a>
+									{% else %}
+									<a href="{% url 'dss:cetak_peringkat' %}" class="btn btn-secondary" title="Cetak Peringkat">
+										<img src="{% static "images/icon/printing.svg" %}" style="width:25px;">
+										Cetak
+									</a>
+									{% endif %}
+									<a href="{% url 'dss:hapus_peringkat' %}" class="btn btn-danger" title="Hapus Peringkat">
+										<img src="{% static "images/icon/delete-white.svg" %}" style="width:25px;"> Hapus
+									</a>
+									<a href="{% url 'dss:lihat_selisih' %}" class="btn btn-primary" title="Lihat Tahapan Perhitungan">
+										<img src="{% static "images/icon/process.svg" %}" style="width:25px;">
+										Perhitungan
+									</a>
+								</div>
+							</div>
+							<hr>
+							<div class="table-responsive table--no-card m-b-30">
+								<table class="table table-borderless table-striped table-earning">
+									<thead class="">
+										<tr>
+											<th colspan="2">Alternatif - Nama Pelamar</th>
+											<th>Nilai Akhir</th>
+											<th>Urutan</th>
+											<th>Detail</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody class="">
+										{% for data in tabel %}
+										<tr>
+											<td>{{data.nama_lengkap.id_candidate}}</td>
+											<td>{{data.nama_lengkap}}</td>
+											<td>{{data.nilai_akhir}}</td>
+											<td class="desc">
+												<h4>{{data.urutan}}</h4>
+											</td>
+											<td>
+												<a href="{% url 'nilai:detail_nilai' data.nama_lengkap.id_candidate %}" class="btn btn-outline-secondary" title="Detail Nilai">
+													<img src="{% static "images/icon/info.svg" %}" style="width:15px;">
+												</a>
+											</td>
+											{% if data.nama_lengkap.status == 'seleksi' %}
+											<td>
+												<a href="{% url 'account:terima' data.nama_lengkap.id_candidate %}" class="btn btn-outline-success" title="Terima">
+													<img src="{% static "images/icon/approve.svg" %}" style="width:15px;">
+												</a>
+												<a href="{% url 'account:tolak' data.nama_lengkap.id_candidate %}" class="btn btn-outline-danger" title="Tolak">
+													<img src="{% static "images/icon/refuse.svg" %}" style="width:15px;">
+												</a>
+											</td>
+											{% else %}
+											<td>
+												{% if data.nama_lengkap.status == 'diterima' %}
+												<span class="status--success">{{data.nama_lengkap.status}}</span>
+												{% elif data.nama_lengkap.status == 'ditolak' %}
+												<span class="status--denied">{{data.nama_lengkap.status}}</span>
+												{% endif %}
+											</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{# {% include "base_menu/footer.html" %} #}
+
+	</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Informasi</h5>
+			</div>
+			{% csrf_token %}
+			<div class="modal-body">
+				<div class="alert alert-warning col-md-12">
+					<center>
+						Anda masih mempunyai data pelamar yang berstatus <b>seleksi</b>
+					</center>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-warning" data-dismiss="modal">
+					Oke
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock isi %}
