@@ -645,11 +645,11 @@ def lihat_prefV(request):
 						
 					d = np.append(d, np.array(pref))
 
-	arr_p 	= np.reshape(d, ( dbk.count(), dbc.count()*(dbc.count()-1) ))
+	arr_ip 	= np.reshape(d, ( dbk.count(), dbc.count()*(dbc.count()-1) ))
 	
-	arr_p_s	= arr_p.astype('U32')
+	arr_ip_s	= arr_ip.astype('U32')
 
-	gabung = np.concatenate((arr_banding_alternatif, arr_p_s.T), axis=1)
+	gabung = np.concatenate((arr_banding_alternatif, arr_ip_s.T), axis=1)
 
 	context = {
 		'judul'		:'Perhitungan',
